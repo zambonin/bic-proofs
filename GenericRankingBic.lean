@@ -1,2 +1,3 @@
 import GenericRankingBic.Counting.Contract
+import GenericRankingBic.Ranking.Basic
 import GenericRankingBic.Ranking.Strategy
