@@ -1,4 +1,5 @@
 import GenericRankingBic.Counting.Contract
+import GenericRankingBic.Orders.Colex
 import GenericRankingBic.Ranking.Basic
 import GenericRankingBic.Ranking.Correctness
 import GenericRankingBic.Ranking.Lemmas

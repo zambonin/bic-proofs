@@ -21,7 +21,7 @@
 │  arithmetic. The generic inverse proofs are `rank_unrank` and              │
 │  `unrank_rank`.                                                            │
 │                                                                            │
-│  The source modules are grouped into `Counting` and `Ranking`.             │
+│  The source modules are grouped into `Counting`, `Orders` and `Ranking`.   │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 
