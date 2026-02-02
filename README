@@ -16,6 +16,11 @@
 │                                                                            │
 │  Type `make` to build the library.                                         │
 │                                                                            │
+│  Import `GenericRankingBic`, or individual modules. `CountingContract`     │
+│  supplies counts; `Strategy` supplies decomposition, traversal and rank    │
+│  arithmetic. The generic inverse proofs are `rank_unrank` and              │
+│  `unrank_rank`.                                                            │
+│                                                                            │
 │  The source modules are grouped into `Counting` and `Ranking`.             │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
