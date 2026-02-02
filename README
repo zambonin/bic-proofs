@@ -16,6 +16,8 @@
 │                                                                            │
 │  Type `make` to build the library.                                         │
 │                                                                            │
+│  The source modules are grouped into `Counting` and `Ranking`.             │
+│                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 
 ┌─ Verification ─────────────────────────────────────────────────────────────┐
