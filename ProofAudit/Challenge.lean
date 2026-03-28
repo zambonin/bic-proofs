@@ -18,4 +18,7 @@ theorem check_rank_bound [C : CountingContract] (σ : Strategy) (n k d : Nat)
     (hd : ∀ x ∈ z, x ≤ d) : rank σ n k d z < C.count n k d := by
   exact rank_lt_count σ n k d z hn hk hd
 
+theorem check_gf_count (n k d : Nat) : compCount n k d = bicCount n k d := by
+  exact compCount_eq_bicCount n k d
+
 end PaperComparator

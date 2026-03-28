@@ -4,7 +4,8 @@
   "theorem_names": [
     "PaperComparator.check_rank_unrank",
     "PaperComparator.check_unrank_rank",
-    "PaperComparator.check_rank_bound"
+    "PaperComparator.check_rank_bound",
+    "PaperComparator.check_gf_count"
   ],
   "permitted_axioms": [
     "propext",

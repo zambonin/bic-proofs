@@ -1,5 +1,6 @@
 import GenericRankingBic.Counting.Compositions
 import GenericRankingBic.Counting.Contract
+import GenericRankingBic.Counting.GeneratingFunction
 import GenericRankingBic.Orders.Colex
 import GenericRankingBic.Orders.RecursiveBlock
 import GenericRankingBic.Ranking.Basic
