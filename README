@@ -21,6 +21,9 @@
 │  arithmetic. The generic inverse proofs are `rank_unrank` and              │
 │  `unrank_rank`.                                                            │
 │                                                                            │
+│  The examples in `GenericRankingBic.lean` show the counting                │
+│  implementations and paper strategies.                                     │
+│                                                                            │
 │  The source modules are grouped into `Counting`, `Orders` and `Ranking`.   │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
