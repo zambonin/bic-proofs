@@ -5,7 +5,8 @@
     "PaperComparator.check_rank_unrank",
     "PaperComparator.check_unrank_rank",
     "PaperComparator.check_rank_bound",
-    "PaperComparator.check_gf_count"
+    "PaperComparator.check_gf_count",
+    "PaperComparator.check_inclusion_exclusion"
   ],
   "permitted_axioms": [
     "propext",

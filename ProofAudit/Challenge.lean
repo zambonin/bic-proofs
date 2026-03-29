@@ -21,4 +21,8 @@ theorem check_rank_bound [C : CountingContract] (σ : Strategy) (n k d : Nat)
 theorem check_gf_count (n k d : Nat) : compCount n k d = bicCount n k d := by
   exact compCount_eq_bicCount n k d
 
+theorem check_inclusion_exclusion (n k d : Nat) :
+    inclExclCount n k d = compCount n k d := by
+  exact inclExclCount_eq_compCount n k d
+
 end PaperComparator
