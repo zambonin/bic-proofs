@@ -25,4 +25,9 @@ theorem check_inclusion_exclusion (n k d : Nat) :
     inclExclCount n k d = compCount n k d := by
   exact inclExclCount_eq_compCount n k d
 
+theorem check_choose_ratio (u p k : Nat) (hp : p + k ≤ u) :
+    (u.choose k : Rat) / ((u - p).choose k : Rat) =
+      ∏ g ∈ Finset.range p, (u - g : Rat) / (u - g - k : Rat) := by
+  exact chooseRatio_prod u p k hp
+
 end PaperComparator
