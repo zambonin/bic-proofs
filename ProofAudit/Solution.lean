@@ -12,4 +12,8 @@ alias check_choose_ratio := chooseRatio_prod
 alias check_weighted_sum := weightedBinomSum_base
 alias check_table_size := accumulatedTableSize
 
+theorem check_halving_set (k : Nat) (hk : 2 ≤ k) :
+    (halvingSet k).card = halvingCardFormula k := by
+  exact halvingSet_card k hk
+
 end PaperComparator

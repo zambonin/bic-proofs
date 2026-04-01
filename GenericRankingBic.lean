@@ -13,6 +13,7 @@ import GenericRankingBic.Ranking.Basic
 import GenericRankingBic.Ranking.Correctness
 import GenericRankingBic.Ranking.Lemmas
 import GenericRankingBic.Ranking.Strategy
+import GenericRankingBic.Tables.HalvingSet
 import GenericRankingBic.Tables.Size
 
 section

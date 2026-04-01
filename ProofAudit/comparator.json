@@ -9,7 +9,8 @@
     "PaperComparator.check_inclusion_exclusion",
     "PaperComparator.check_choose_ratio",
     "PaperComparator.check_weighted_sum",
-    "PaperComparator.check_table_size"
+    "PaperComparator.check_table_size",
+    "PaperComparator.check_halving_set"
   ],
   "permitted_axioms": [
     "propext",

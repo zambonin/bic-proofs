@@ -40,4 +40,8 @@ theorem check_table_size (n k d : Nat) (hd : d ≤ n) :
       (k + 1) * (d * (d + 1) / 2 + 2 * (d + 1) + (n - d) * (d + 2)) := by
   exact accumulatedTableSize n k d hd
 
+theorem check_halving_set (k : Nat) (hk : 2 ≤ k) :
+    (halvingSet k).card = halvingCardFormula k := by
+  exact halvingSet_card k hk
+
 end PaperComparator
