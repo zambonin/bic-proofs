@@ -6,6 +6,7 @@ import GenericRankingBic.Counting.GeneratingFunction
 import GenericRankingBic.Counting.InclusionExclusion
 import GenericRankingBic.Counting.Instances
 import GenericRankingBic.Counting.PolynomialIdentities
+import GenericRankingBic.Counting.WeightedSum
 import GenericRankingBic.Orders.Colex
 import GenericRankingBic.Orders.RecursiveBlock
 import GenericRankingBic.Ranking.Basic

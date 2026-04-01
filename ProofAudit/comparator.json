@@ -7,7 +7,8 @@
     "PaperComparator.check_rank_bound",
     "PaperComparator.check_gf_count",
     "PaperComparator.check_inclusion_exclusion",
-    "PaperComparator.check_choose_ratio"
+    "PaperComparator.check_choose_ratio",
+    "PaperComparator.check_weighted_sum"
   ],
   "permitted_axioms": [
     "propext",

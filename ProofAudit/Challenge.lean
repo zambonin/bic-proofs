@@ -30,4 +30,9 @@ theorem check_choose_ratio (u p k : Nat) (hp : p + k ≤ u) :
       ∏ g ∈ Finset.range p, (u - g : Rat) / (u - g - k : Rat) := by
   exact chooseRatio_prod u p k hp
 
+theorem check_weighted_sum (c y l : Nat) :
+    weightedBinomSum 0 c y l =
+      (y + 1).choose (c + 1) - (y - l).choose (c + 1) := by
+  exact weightedBinomSum_base c y l
+
 end PaperComparator
