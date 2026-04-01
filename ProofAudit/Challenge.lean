@@ -35,4 +35,9 @@ theorem check_weighted_sum (c y l : Nat) :
       (y + 1).choose (c + 1) - (y - l).choose (c + 1) := by
   exact weightedBinomSum_base c y l
 
+theorem check_table_size (n k d : Nat) (hd : d ≤ n) :
+    ∑ _i ∈ Finset.range (k + 1), ∑ j ∈ Finset.range (n + 1), (min j d + 2) =
+      (k + 1) * (d * (d + 1) / 2 + 2 * (d + 1) + (n - d) * (d + 2)) := by
+  exact accumulatedTableSize n k d hd
+
 end PaperComparator

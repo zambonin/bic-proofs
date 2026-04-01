@@ -10,5 +10,6 @@ alias check_gf_count := compCount_eq_bicCount
 alias check_inclusion_exclusion := inclExclCount_eq_compCount
 alias check_choose_ratio := chooseRatio_prod
 alias check_weighted_sum := weightedBinomSum_base
+alias check_table_size := accumulatedTableSize
 
 end PaperComparator
