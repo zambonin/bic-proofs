@@ -1,3 +1,5 @@
+import GenericRankingBic.Counting.AccumulatedCount
+import GenericRankingBic.Counting.AccumulatedSet
 import GenericRankingBic.Counting.BinomialRatio
 import GenericRankingBic.Counting.Compositions
 import GenericRankingBic.Counting.Contract
