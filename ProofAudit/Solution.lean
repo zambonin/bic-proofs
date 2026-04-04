@@ -16,4 +16,6 @@ theorem check_halving_set (k : Nat) (hk : 2 ≤ k) :
     (halvingSet k).card = halvingCardFormula k := by
   exact halvingSet_card k hk
 
+alias check_raw_moment := rawMoment_eq_sum
+
 end PaperComparator

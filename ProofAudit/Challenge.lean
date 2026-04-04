@@ -44,4 +44,9 @@ theorem check_halving_set (k : Nat) (hk : 2 ≤ k) :
     (halvingSet k).card = halvingCardFormula k := by
   exact halvingSet_card k hk
 
+theorem check_raw_moment (p n k d l : Nat) (hk : 0 < k) (hl : l ≤ n) :
+    rawMoment p n k d l =
+      ∑ j ∈ Finset.range (l + 1), (↑(n - j) : Int) ^ p * (compCount (n - j) k d : Int) := by
+  exact rawMoment_eq_sum p n k d l hk hl
+
 end PaperComparator
