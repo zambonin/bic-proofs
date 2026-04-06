@@ -165,3 +165,53 @@ theorem compCountAcc_eq_partial_sum (n k d l : ℕ) (hk : 0 < k) (hl : l ≤ n) 
     have h_idx : n - 1 - l = n - (l + 1) := by omega
     rw [h_idx] at h_step
     linarith
+
+/-- Once the window reaches zero, extending it adds no new composition count. -/
+lemma compCountAcc_step_stable (n k d l : ℕ) (hk : 0 < k) (hl : n ≤ l) :
+    compCountAcc n k d (l + 1) = compCountAcc n k d l := by
+  unfold compCountAcc
+  apply Finset.sum_congr rfl
+  intro i hi
+  have hm : (n : ℤ) - ((d + 1) * i : ℕ) + k - 1 ≤
+        (l : ℤ) + (k - 1 : ℕ) := by
+      omega
+  by_cases hsmall : (n : ℤ) - ((d + 1) * i : ℕ) + k - 1 ≤ (l : ℤ)
+  · rw [show binomSumZ (k - 1) (↑n - ↑((d + 1) * i) + ↑k - 1) (l + 1) =
+          binomSumZ (k - 1) (↑n - ↑((d + 1) * i) + ↑k - 1) l from ?_]
+    · by_cases hneg : (n : ℤ) - ((d + 1) * i : ℕ) + k - 1 < 0
+      · have hz (v : ℕ) :
+            binomSumZ (k - 1) (↑n - ↑((d + 1) * i) + ↑k - 1) v = 0 := by
+          unfold binomSumZ weightedBinomSumZ
+          rw [if_pos hneg]
+        rw [hz (l + 1), hz l]
+      · exact sub_eq_zero.mp (binomSumZ_step_small (k - 1) l _ (by omega) hsmall)
+  · have hlarge : (l : ℤ) + 1 ≤ (n : ℤ) - ((d + 1) * i : ℕ) + k - 1 := by omega
+    have hzero : Nat.choose ((↑n - ↑((d + 1) * i) + ↑k - 1 : ℤ).toNat - l - 1) (k - 1) = 0 := by
+      apply Nat.choose_eq_zero_of_lt
+      omega
+    have hdiff := binomSumZ_step_large (k - 1) l
+      (↑n - ↑((d + 1) * i) + ↑k - 1) hlarge
+    rw [hzero] at hdiff
+    have hdiff0 :
+        binomSumZ (k - 1) (↑n - ↑((d + 1) * i) + ↑k - 1) (l + 1) -
+          binomSumZ (k - 1) (↑n - ↑((d + 1) * i) + ↑k - 1) l = 0 := by
+      simpa using hdiff
+    rw [sub_eq_zero.mp hdiff0]
+
+/-- The analytical expression is constant after its window covers all nonnegative sums. -/
+theorem compCountAcc_eq_at_n (n k d l : ℕ) (hk : 0 < k) (hl : n ≤ l) :
+    compCountAcc n k d l = compCountAcc n k d n := by
+  induction l, hl using Nat.le_induction with
+  | base => rfl
+  | succ l hle ih =>
+    rw [compCountAcc_step_stable n k d l hk hle, ih]
+
+/-- Accumulated counts over the interval `[n-l,n]`, clipped at zero. -/
+theorem compCountAcc_eq_partial_sum_clipped (n k d l : ℕ) (hk : 0 < k) :
+    compCountAcc n k d l =
+      ∑ j ∈ Finset.range (min l n + 1), (compCount (n - j) k d : ℤ) := by
+  by_cases h : l ≤ n
+  · simpa [min_eq_left h] using compCountAcc_eq_partial_sum n k d l hk h
+  · have hle : n ≤ l := by omega
+    rw [compCountAcc_eq_at_n n k d l hk hle]
+    simpa [min_eq_right hle] using compCountAcc_eq_partial_sum n k d n hk le_rfl

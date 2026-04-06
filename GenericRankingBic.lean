@@ -1,3 +1,4 @@
+import GenericRankingBic.Counting.AccumulatedCardinality
 import GenericRankingBic.Counting.AccumulatedCount
 import GenericRankingBic.Counting.AccumulatedSet
 import GenericRankingBic.Counting.BinomialRatio

@@ -194,6 +194,51 @@ theorem rawMoment_eq_sum (p n k d l : ℕ) (hk : 0 < k)
     rw [Finset.sum_range_succ, ← ih (Nat.le_of_lt (Nat.lt_of_succ_le hl))]
     convert eq_add_of_sub_eq' (rawMoment_step p n k d l hk (by linarith)) using 1
 
+/-- Weighted binomial windows are stable once the new endpoint lies below the
+    binomial coefficient's lower index. -/
+private lemma weightedBinomSumZ_step_stable (s c l : ℕ) (m : ℤ)
+    (hm : m ≤ (l : ℤ) + c) :
+    weightedBinomSumZ s c m (l + 1) = weightedBinomSumZ s c m l := by
+  by_cases hsmall : m ≤ (l : ℤ)
+  · exact sub_eq_zero.mp (weightedBinomSumZ_diff_small s c l m hsmall)
+  · have hlarge : (l : ℤ) + 1 ≤ m := by omega
+    have hzero : Nat.choose (m.toNat - l - 1) c = 0 := by
+      apply Nat.choose_eq_zero_of_lt
+      omega
+    have hdiff := weightedBinomSumZ_diff_power s c l m hlarge
+    rw [hzero] at hdiff
+    simpa using sub_eq_zero.mp hdiff
+
+/-- The raw-moment analytical expression stabilizes after the window reaches zero. -/
+lemma rawMoment_step_stable (p n k d l : ℕ) (hk : 0 < k) (hl : n ≤ l) :
+    rawMoment p n k d (l + 1) = rawMoment p n k d l := by
+  unfold rawMoment
+  apply Finset.sum_congr rfl
+  intro i hi
+  congr 1
+  apply Finset.sum_congr rfl
+  intro s hs
+  have hm : (n : ℤ) - ((d + 1) * i : ℕ) + k - 1 ≤
+      (l : ℤ) + (k - 1 : ℕ) := by omega
+  rw [weightedBinomSumZ_step_stable s (k - 1) l _ hm]
+
+theorem rawMoment_eq_at_n (p n k d l : ℕ) (hk : 0 < k) (hl : n ≤ l) :
+    rawMoment p n k d l = rawMoment p n k d n := by
+  induction l, hl using Nat.le_induction with
+  | base => rfl
+  | succ l hle ih => rw [rawMoment_step_stable p n k d l hk hle, ih]
+
+/-- Unnormalized power sum over `[n-l,n]`, clipped at zero. -/
+theorem rawMoment_eq_sum_clipped (p n k d l : ℕ) (hk : 0 < k) :
+    rawMoment p n k d l =
+      ∑ j ∈ Finset.range (min l n + 1),
+        (↑(n - j) : ℤ) ^ p * (compCount (n - j) k d : ℤ) := by
+  by_cases h : l ≤ n
+  · simpa [min_eq_left h] using rawMoment_eq_sum p n k d l hk h
+  · have hle : n ≤ l := by omega
+    rw [rawMoment_eq_at_n p n k d l hk hle]
+    simpa [min_eq_right hle] using rawMoment_eq_sum p n k d n hk le_rfl
+
 private def scaledStep (d i : ℕ) : ℤ := ↑((d + 1) * i)
 
 /-- Closed expression for the first unnormalized moment. -/
