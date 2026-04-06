@@ -196,6 +196,61 @@ theorem variance_partial_sum (n k d l : ℕ) (hk : 1 < k) (j : ℕ) (hj : j ≤ 
       sum_sq_totalSumQ n k d l hk]
   ring
 
+/-- Mean of a rational-valued statistic on a finite uniform sample space,
+with value zero when the space is empty. -/
+def finiteMean {α : Type*} (S : Finset α) (f : α → ℚ) : ℚ :=
+  (∑ z ∈ S, f z) / S.card
+
+/-- Variance of a rational-valued statistic on a finite uniform sample space,
+with value zero when the space is empty. -/
+def finiteVariance {α : Type*} (S : Finset α) (f : α → ℚ) : ℚ :=
+  (∑ z ∈ S, (f z) ^ 2) / S.card - (finiteMean S f) ^ 2
+
+/-- Mean of a partial sum in a nonempty uniform accumulated class. -/
+theorem expected_partial_sum_normalized (n k d l : ℕ) (hk : 0 < k)
+    (j : ℕ) (hj : j ≤ k) (hS : 0 < (BoundedCompAcc n k d l).card) :
+    finiteMean (BoundedCompAcc n k d l) (fun z => partialSumQ z j) =
+      (j : ℚ) / k * finiteMean (BoundedCompAcc n k d l) totalSumQ := by
+  have hN : ((BoundedCompAcc n k d l).card : ℚ) ≠ 0 := by
+    exact_mod_cast Nat.ne_of_gt hS
+  have hkq : (k : ℚ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt hk
+  have h := expected_partial_sum n k d l hk j hj
+  unfold finiteMean
+  field_simp
+  linear_combination h
+
+/-- Variance expressed with a single denominator, useful for normalization. -/
+private theorem finiteVariance_eq_num {α : Type*} (S : Finset α)
+    (f : α → ℚ) (hS : 0 < S.card) :
+    finiteVariance S f =
+      ((S.card : ℚ) * (∑ z ∈ S, (f z) ^ 2) - (∑ z ∈ S, f z) ^ 2) /
+        (S.card : ℚ) ^ 2 := by
+  have hN : (S.card : ℚ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt hS
+  unfold finiteVariance finiteMean
+  field_simp
+
+/-- Variance of a partial sum in a nonempty uniform accumulated class. -/
+theorem variance_partial_sum_normalized (n k d l : ℕ) (hk : 1 < k)
+    (j : ℕ) (hj : j ≤ k) (hS : 0 < (BoundedCompAcc n k d l).card) :
+    finiteVariance (BoundedCompAcc n k d l) (fun z => partialSumQ z j) =
+      (j : ℚ) * (k - j) / (k - 1) *
+          finiteVariance (BoundedCompAcc n k d l)
+            (fun z => (z ⟨0, by omega⟩ : ℚ)) +
+      (j : ℚ) * (j - 1) / ((k : ℚ) * (k - 1)) *
+          finiteVariance (BoundedCompAcc n k d l) totalSumQ := by
+  have hN : ((BoundedCompAcc n k d l).card : ℚ) ≠ 0 := by
+    exact_mod_cast Nat.ne_of_gt hS
+  have hkq : (k : ℚ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt (by omega : 0 < k)
+  have hkmq : (k : ℚ) - 1 ≠ 0 := by
+    have : (1 : ℚ) < k := by exact_mod_cast hk
+    linarith
+  rw [finiteVariance_eq_num _ _ hS, finiteVariance_eq_num _ _ hS,
+    finiteVariance_eq_num _ _ hS]
+  have h := variance_partial_sum n k d l hk j hj
+  dsimp only at h
+  field_simp
+  linear_combination h
+
 /-- The first coordinate is bounded by both the total and the part bound. -/
 lemma first_coord_le (n k d : ℕ) (z : Fin (k + 1) → ℕ) (hz : z ∈ BoundedComp n (k + 1) d) :
     z 0 ≤ min n d := by
@@ -326,5 +381,77 @@ theorem var_single_part_decomp (n k d l : ℕ) (hk : 1 < k) :
       have := Multiset.Nat.mem_antidiagonalTuple.mp this.1
       simp_all +decide [Fin.sum_univ_succ]
       exact le_trans (Nat.le_add_right _ _) (this.le.trans (Nat.sub_le _ _))
+
+/-- First-coordinate variance from fiber counts and the total mean in a
+nonempty uniform accumulated class. -/
+theorem variance_single_part_normalized (n k d l : ℕ) (hk : 1 < k)
+    (hS : 0 < (BoundedCompAcc n k d l).card) :
+    finiteVariance (BoundedCompAcc n k d l)
+        (fun z => (z ⟨0, by omega⟩ : ℚ)) =
+      (∑ y ∈ Finset.range (min n d + 1),
+          (y : ℚ) ^ 2 * (BoundedCompAcc (n - y) (k - 1) d l).card) /
+          (BoundedCompAcc n k d l).card -
+        (finiteMean (BoundedCompAcc n k d l) totalSumQ / k) ^ 2 := by
+  have hkq : (k : ℚ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt (by omega : 0 < k)
+  have hsq :
+      ∑ z ∈ BoundedCompAcc n k d l, ((z ⟨0, by omega⟩ : ℚ) ^ 2) =
+        ∑ y ∈ Finset.range (min n d + 1),
+          (y : ℚ) ^ 2 * (BoundedCompAcc (n - y) (k - 1) d l).card := by
+    exact_mod_cast var_single_part_decomp n k d l hk
+  have htotal := sum_totalSumQ n k d l (by omega : 0 < k)
+  unfold finiteVariance finiteMean
+  rw [hsq, htotal]
+  field_simp
+
+/-- A composition in the non-accumulated set has total sum `n`. -/
+private theorem totalSumQ_of_mem_acc_zero (n k d : ℕ) (z : Fin k → ℕ)
+    (hz : z ∈ BoundedCompAcc n k d 0) : totalSumQ z = n := by
+  have hz' : z ∈ BoundedComp n k d := by simpa [BoundedCompAcc] using hz
+  have hsum : ∑ i : Fin k, z i = n := by
+    exact mem_antidiagonalTuple.mp (Finset.mem_filter.mp hz').1
+  unfold totalSumQ
+  exact_mod_cast hsum
+
+/-- For `l = 0`, the expected total sum is `n`. -/
+theorem mean_totalSumQ_acc_zero (n k d : ℕ)
+    (hS : 0 < (BoundedCompAcc n k d 0).card) :
+    finiteMean (BoundedCompAcc n k d 0) totalSumQ = n := by
+  have hsum :
+      ∑ z ∈ BoundedCompAcc n k d 0, totalSumQ z =
+        (BoundedCompAcc n k d 0).card * (n : ℚ) := by
+    simp_rw [Finset.sum_congr rfl
+      (fun z hz => totalSumQ_of_mem_acc_zero n k d z hz)]
+    simp
+  have hN : ((BoundedCompAcc n k d 0).card : ℚ) ≠ 0 := by
+    exact_mod_cast Nat.ne_of_gt hS
+  unfold finiteMean
+  rw [hsum]
+  field_simp
+
+/-- For `l = 0`, the total sum has zero variance. -/
+theorem variance_totalSumQ_acc_zero (n k d : ℕ)
+    (hS : 0 < (BoundedCompAcc n k d 0).card) :
+    finiteVariance (BoundedCompAcc n k d 0) totalSumQ = 0 := by
+  have hsq :
+      ∑ z ∈ BoundedCompAcc n k d 0, (totalSumQ z) ^ 2 =
+        (BoundedCompAcc n k d 0).card * (n : ℚ) ^ 2 := by
+    simp_rw [Finset.sum_congr rfl
+      (fun z hz => congrArg (· ^ 2) (totalSumQ_of_mem_acc_zero n k d z hz))]
+    simp
+  have hN : ((BoundedCompAcc n k d 0).card : ℚ) ≠ 0 := by
+    exact_mod_cast Nat.ne_of_gt hS
+  unfold finiteVariance
+  rw [hsq, mean_totalSumQ_acc_zero n k d hS]
+  field_simp
+  ring
+
+/-- Partial-sum mean in a nonempty fixed-total class. -/
+theorem expected_partial_sum_acc_zero (n k d : ℕ) (hk : 0 < k)
+    (j : ℕ) (hj : j ≤ k) (hS : 0 < (BoundedCompAcc n k d 0).card) :
+    finiteMean (BoundedCompAcc n k d 0) (fun z => partialSumQ z j) =
+      (j : ℚ) * n / k := by
+  rw [expected_partial_sum_normalized n k d 0 hk j hj hS,
+    mean_totalSumQ_acc_zero n k d hS]
+  ring
 
 end Compositions

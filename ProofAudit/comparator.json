@@ -11,7 +11,8 @@
     "PaperComparator.check_weighted_sum",
     "PaperComparator.check_table_size",
     "PaperComparator.check_halving_set",
-    "PaperComparator.check_raw_moment"
+    "PaperComparator.check_raw_moment",
+    "PaperComparator.check_moment_variance"
   ],
   "permitted_axioms": [
     "propext",

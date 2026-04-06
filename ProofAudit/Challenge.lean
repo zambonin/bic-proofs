@@ -49,4 +49,10 @@ theorem check_raw_moment (p n k d l : Nat) (hk : 0 < k) (hl : l ≤ n) :
       ∑ j ∈ Finset.range (l + 1), (↑(n - j) : Int) ^ p * (compCount (n - j) k d : Int) := by
   exact rawMoment_eq_sum p n k d l hk hl
 
+theorem check_moment_variance (n k d l : Nat) (hk : 0 < k) :
+    finiteVariance (BoundedCompAcc n k d l) totalSumQ =
+      (rawMoment 2 n k d l : Rat) / (rawMoment 0 n k d l : Rat) -
+        ((rawMoment 1 n k d l : Rat) / (rawMoment 0 n k d l : Rat)) ^ 2 := by
+  exact finiteVariance_totalSumQ_eq_rawMoments n k d l hk
+
 end PaperComparator
