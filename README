@@ -24,8 +24,8 @@
 │  The examples in `GenericRankingBic.lean` show the counting                │
 │  implementations and paper strategies.                                     │
 │                                                                            │
-│  The source modules are grouped into `Counting`, `Orders`, `Ranking` and   │
-│  `Tables`.                                                                 │
+│  The source modules are grouped into `Counting`, `Orders`, `Ranking`,      │
+│  `Statistics` and `Tables`.                                                │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 
