@@ -54,3 +54,84 @@ theorem chooseRatio_step (u k : ℕ) (h : 1 + k ≤ u) :
     (u : ℚ) / (u - k : ℚ) := by
   have := chooseRatio_prod u 1 k h
   simp at this; exact this
+
+/-- The binomial factor at an admissible inclusion–exclusion index
+`(d + 1) * j ≤ n`. It is not zero-extended outside that range. -/
+def inclExclTerm (n i d j : ℕ) : ℕ :=
+  (n - (d + 1) * j + (i - 1)).choose (i - 1)
+
+/-- The signed inclusion–exclusion summand at an admissible index. -/
+def inclExclSummand (n i d j : ℕ) : ℚ :=
+  (-1 : ℚ) ^ j * (i.choose j : ℚ) * inclExclTerm n i d j
+
+/-- At an admissible index, `inclExclTerm` is the binomial factor in `compCount_inclExcl`. -/
+theorem inclExclTerm_eq_displayed (n i d j : ℕ)
+    (hbound : (d + 1) * j ≤ n) :
+    inclExclTerm n i d j =
+      (n + i - 1 - (d + 1) * j).choose (i - 1) := by
+  cases i with
+  | zero => simp [inclExclTerm]
+  | succ i =>
+    unfold inclExclTerm
+    congr 1
+    omega
+
+/-- Ratio of binomial factors separated by `p`.
+The index bound keeps the denominator coefficient nonzero. -/
+theorem inclExclTerm_ratio (n i d j p : ℕ) (hi : 0 < i)
+    (hbound : (d + 1) * j + p ≤ n) :
+    (inclExclTerm n i d j : ℚ) /
+        (inclExclTerm (n - p) i d j : ℚ) =
+      ∏ g ∈ range p,
+        (((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) - g) /
+          (((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) - g - (i - 1 : ℕ)) := by
+  have hp : p + (i - 1) ≤ n - (d + 1) * j + (i - 1) := by omega
+  have hsub :
+      (n - (d + 1) * j + (i - 1)) - p =
+        n - p - (d + 1) * j + (i - 1) := by omega
+  simpa only [inclExclTerm, hsub] using
+    chooseRatio_prod (n - (d + 1) * j + (i - 1)) p (i - 1) hp
+
+/-- Ratio of complete signed summands separated by `p`.
+The bound `j ≤ i` makes their common binomial factor nonzero. -/
+theorem inclExclSummand_ratio (n i d j p : ℕ) (hi : 0 < i)
+    (hj : j ≤ i) (hbound : (d + 1) * j + p ≤ n) :
+    inclExclSummand n i d j / inclExclSummand (n - p) i d j =
+      ∏ g ∈ range p,
+        (((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) - g) /
+          (((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) - g - (i - 1 : ℕ)) := by
+  have hc : (-1 : ℚ) ^ j * (i.choose j : ℚ) ≠ 0 := by
+    exact mul_ne_zero (pow_ne_zero _ (by norm_num))
+      (by exact_mod_cast Nat.ne_of_gt (Nat.choose_pos hj))
+  unfold inclExclSummand
+  rw [mul_div_mul_left _ _ hc]
+  exact inclExclTerm_ratio n i d j p hi hbound
+
+/-- Ratio of consecutive binomial factors. -/
+theorem inclExclTerm_ratio_step (n i d j : ℕ) (hi : 0 < i)
+    (hbound : (d + 1) * j + 1 ≤ n) :
+    (inclExclTerm n i d j : ℚ) /
+        (inclExclTerm (n - 1) i d j : ℚ) =
+      ((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) /
+        ((n - (d + 1) * j : ℕ) : ℚ) := by
+  have h := inclExclTerm_ratio n i d j 1 hi hbound
+  simp only [prod_range_succ, prod_range_zero, one_mul] at h
+  have hden :
+      ((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) - (i - 1 : ℕ) =
+        ((n - (d + 1) * j : ℕ) : ℚ) := by
+    simp only [Nat.cast_add]
+    ring
+  simpa only [Nat.cast_zero, sub_zero, hden] using h
+
+/-- Ratio of consecutive signed summands. -/
+theorem inclExclSummand_ratio_step (n i d j : ℕ) (hi : 0 < i)
+    (hj : j ≤ i) (hbound : (d + 1) * j + 1 ≤ n) :
+    inclExclSummand n i d j / inclExclSummand (n - 1) i d j =
+      ((n - (d + 1) * j + (i - 1) : ℕ) : ℚ) /
+        ((n - (d + 1) * j : ℕ) : ℚ) := by
+  have hc : (-1 : ℚ) ^ j * (i.choose j : ℚ) ≠ 0 := by
+    exact mul_ne_zero (pow_ne_zero _ (by norm_num))
+      (by exact_mod_cast Nat.ne_of_gt (Nat.choose_pos hj))
+  unfold inclExclSummand
+  rw [mul_div_mul_left _ _ hc]
+  exact inclExclTerm_ratio_step n i d j hi hbound
