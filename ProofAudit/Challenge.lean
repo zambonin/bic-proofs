@@ -53,6 +53,12 @@ theorem check_recursive_sequence [C : CountingContract] (σ : Strategy) (n k d :
     recursiveSequence σ n k d = unrankSequence σ n k d := by
   exact recursiveSequence_eq_unrankSequence σ n k d
 
+theorem check_bous_path [C : CountingContract] (d₀ n kl kr : Nat) :
+    ((stratBousAt d₀).path n kl kr).filter
+      (fun w => 0 < C.count w kl d₀ * C.count (n - w) kr d₀) =
+      pathAlternatingValid n kl kr d₀ := by
+  exact stratBousAt_effective_path d₀ n kl kr
+
 theorem check_moment_variance (n k d l : Nat) (hk : 0 < k) :
     finiteVariance (BoundedCompAcc n k d l) totalSumQ =
       (rawMoment 2 n k d l : Rat) / (rawMoment 0 n k d l : Rat) -
