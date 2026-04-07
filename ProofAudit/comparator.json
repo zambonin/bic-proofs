@@ -12,6 +12,7 @@
     "PaperComparator.check_table_size",
     "PaperComparator.check_halving_set",
     "PaperComparator.check_raw_moment",
+    "PaperComparator.check_recursive_sequence",
     "PaperComparator.check_moment_variance"
   ],
   "permitted_axioms": [

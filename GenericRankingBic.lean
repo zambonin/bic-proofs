@@ -18,6 +18,7 @@ import GenericRankingBic.Orders.Properties
 import GenericRankingBic.Orders.RecursiveBlock
 import GenericRankingBic.Ranking.Basic
 import GenericRankingBic.Ranking.Correctness
+import GenericRankingBic.Ranking.Enumeration
 import GenericRankingBic.Ranking.Lemmas
 import GenericRankingBic.Ranking.Strategy
 import GenericRankingBic.Statistics.Moments
