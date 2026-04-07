@@ -21,6 +21,7 @@ import GenericRankingBic.Ranking.Correctness
 import GenericRankingBic.Ranking.Enumeration
 import GenericRankingBic.Ranking.Lemmas
 import GenericRankingBic.Ranking.Product
+import GenericRankingBic.Ranking.Sampling
 import GenericRankingBic.Ranking.Strategy
 import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
