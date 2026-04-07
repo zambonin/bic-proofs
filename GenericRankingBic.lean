@@ -13,6 +13,7 @@ import GenericRankingBic.Counting.RawMoment
 import GenericRankingBic.Counting.WeightedSum
 import GenericRankingBic.Orders.Colex
 import GenericRankingBic.Orders.Gray
+import GenericRankingBic.Orders.GrayAdjacency
 import GenericRankingBic.Orders.Properties
 import GenericRankingBic.Orders.RecursiveBlock
 import GenericRankingBic.Ranking.Basic
