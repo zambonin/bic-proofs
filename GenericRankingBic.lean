@@ -26,6 +26,7 @@ import GenericRankingBic.Ranking.Sampling
 import GenericRankingBic.Ranking.Strategy
 import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
+import GenericRankingBic.Tables.Basic
 import GenericRankingBic.Tables.HalvingSet
 import GenericRankingBic.Tables.Size
 
