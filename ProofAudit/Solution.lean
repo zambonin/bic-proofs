@@ -23,4 +23,13 @@ alias check_cached_accumulated := cachedAccumulated_eq_compCountAcc
 alias check_bous_path := stratBousAt_effective_path
 alias check_moment_variance := finiteVariance_totalSumQ_eq_rawMoments
 
+theorem check_probabilistic_fallback (n k d c i j : Nat)
+    (hi : i ≤ k) (hj : j ≤ n) :
+    probCombLookupOrCompute n k d c i j
+      (compPartialMean n k d) (compPartialVariance n k d) = compCount j i d :=
+  probCombLookupOrCompute_correct n k d c i j _ _ hi hj
+
+alias check_variance_nonnegative := compPartialVariance_nonneg
+alias check_real_band := compositionBand_iff_abs_le_sqrt
+
 end PaperComparator

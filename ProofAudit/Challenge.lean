@@ -74,4 +74,20 @@ theorem check_moment_variance (n k d l : Nat) (hk : 0 < k) :
         ((rawMoment 1 n k d l : Rat) / (rawMoment 0 n k d l : Rat)) ^ 2 := by
   exact finiteVariance_totalSumQ_eq_rawMoments n k d l hk
 
+theorem check_probabilistic_fallback (n k d c i j : Nat)
+    (hi : i ≤ k) (hj : j ≤ n) :
+    probCombLookupOrCompute n k d c i j
+      (compPartialMean n k d) (compPartialVariance n k d) = compCount j i d := by
+  exact probCombLookupOrCompute_correct n k d c i j _ _ hi hj
+
+theorem check_variance_nonnegative (n k d i : Nat) :
+    0 ≤ compPartialVariance n k d i := by
+  exact compPartialVariance_nonneg n k d i
+
+theorem check_real_band (n k d c i j : Nat) :
+    inStatisticalBand (compPartialMean n k d) (compPartialVariance n k d) c i j = true ↔
+      |(j : Real) - (compPartialMean n k d i : Real)| ≤
+        (c : Real) * Real.sqrt (compPartialVariance n k d i : Real) := by
+  exact compositionBand_iff_abs_le_sqrt n k d c i j
+
 end PaperComparator

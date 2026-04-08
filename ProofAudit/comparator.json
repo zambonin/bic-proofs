@@ -16,7 +16,10 @@
     "PaperComparator.check_bisect",
     "PaperComparator.check_cached_accumulated",
     "PaperComparator.check_bous_path",
-    "PaperComparator.check_moment_variance"
+    "PaperComparator.check_moment_variance",
+    "PaperComparator.check_probabilistic_fallback",
+    "PaperComparator.check_variance_nonnegative",
+    "PaperComparator.check_real_band"
   ],
   "permitted_axioms": [
     "propext",

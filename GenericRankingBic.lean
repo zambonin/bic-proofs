@@ -32,9 +32,12 @@ import GenericRankingBic.Search.ClosedFormCost
 import GenericRankingBic.Search.ColexThreshold
 import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
+import GenericRankingBic.Statistics.RealBand
+import GenericRankingBic.Statistics.Variance
 import GenericRankingBic.Tables.Basic
 import GenericRankingBic.Tables.ConstructionCost
 import GenericRankingBic.Tables.HalvingSet
+import GenericRankingBic.Tables.Probabilistic
 import GenericRankingBic.Tables.RecursiveBlockRows
 import GenericRankingBic.Tables.Size
 
