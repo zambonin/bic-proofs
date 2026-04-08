@@ -28,6 +28,7 @@ import GenericRankingBic.Search.Accumulated
 import GenericRankingBic.Search.AccumulatedCost
 import GenericRankingBic.Search.Bisect
 import GenericRankingBic.Search.BisectCost
+import GenericRankingBic.Search.ClosedFormCost
 import GenericRankingBic.Search.ColexThreshold
 import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
