@@ -30,6 +30,7 @@ import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
 import GenericRankingBic.Tables.Basic
 import GenericRankingBic.Tables.HalvingSet
+import GenericRankingBic.Tables.RecursiveBlockRows
 import GenericRankingBic.Tables.Size
 
 section
