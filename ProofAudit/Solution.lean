@@ -31,5 +31,7 @@ theorem check_probabilistic_fallback (n k d c i j : Nat)
 
 alias check_variance_nonnegative := compPartialVariance_nonneg
 alias check_real_band := compositionBand_iff_abs_le_sqrt
+alias check_retained_cell_bound := retainedBandCells_le
+alias check_sparse_count_table_size := sparseProbCombStoredValues_eq_retainedBandCells
 
 end PaperComparator

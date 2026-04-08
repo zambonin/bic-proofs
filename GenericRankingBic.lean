@@ -38,8 +38,10 @@ import GenericRankingBic.Tables.Basic
 import GenericRankingBic.Tables.ConstructionCost
 import GenericRankingBic.Tables.HalvingSet
 import GenericRankingBic.Tables.Probabilistic
+import GenericRankingBic.Tables.ProbabilisticSize
 import GenericRankingBic.Tables.RecursiveBlockRows
 import GenericRankingBic.Tables.Size
+import GenericRankingBic.Tables.Sparse
 
 section
 

@@ -19,7 +19,9 @@
     "PaperComparator.check_moment_variance",
     "PaperComparator.check_probabilistic_fallback",
     "PaperComparator.check_variance_nonnegative",
-    "PaperComparator.check_real_band"
+    "PaperComparator.check_real_band",
+    "PaperComparator.check_retained_cell_bound",
+    "PaperComparator.check_sparse_count_table_size"
   ],
   "permitted_axioms": [
     "propext",

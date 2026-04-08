@@ -90,4 +90,13 @@ theorem check_real_band (n k d c i j : Nat) :
         (c : Real) * Real.sqrt (compPartialVariance n k d i : Real) := by
   exact compositionBand_iff_abs_le_sqrt n k d c i j
 
+theorem check_retained_cell_bound (n k d c : Nat) (hk : 1 < k) :
+    retainedBandCells n k d c ≤
+      (k + 1) * (2 * c * d * (Nat.sqrt k + 1) + 1) := by
+  exact retainedBandCells_le n k d c hk
+
+theorem check_sparse_count_table_size (n k d c : Nat) :
+    sparseProbCombStoredValues n k d c = retainedBandCells n k d c := by
+  exact sparseProbCombStoredValues_eq_retainedBandCells n k d c
+
 end PaperComparator
