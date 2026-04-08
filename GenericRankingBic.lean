@@ -26,6 +26,7 @@ import GenericRankingBic.Ranking.Sampling
 import GenericRankingBic.Ranking.Strategy
 import GenericRankingBic.Search.Bisect
 import GenericRankingBic.Search.BisectCost
+import GenericRankingBic.Search.ColexThreshold
 import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
 import GenericRankingBic.Tables.Basic
