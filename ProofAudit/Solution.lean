@@ -18,6 +18,8 @@ theorem check_halving_set (k : Nat) (hk : 2 ≤ k) :
 
 alias check_raw_moment := rawMoment_eq_sum
 alias check_recursive_sequence := recursiveSequence_eq_unrankSequence
+alias check_bisect := bisectBlock_eq_findBlock
+alias check_cached_accumulated := cachedAccumulated_eq_compCountAcc
 alias check_bous_path := stratBousAt_effective_path
 alias check_moment_variance := finiteVariance_totalSumQ_eq_rawMoments
 

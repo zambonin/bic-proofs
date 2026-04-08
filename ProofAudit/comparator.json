@@ -13,6 +13,8 @@
     "PaperComparator.check_halving_set",
     "PaperComparator.check_raw_moment",
     "PaperComparator.check_recursive_sequence",
+    "PaperComparator.check_bisect",
+    "PaperComparator.check_cached_accumulated",
     "PaperComparator.check_bous_path",
     "PaperComparator.check_moment_variance"
   ],

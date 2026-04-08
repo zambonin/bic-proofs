@@ -25,7 +25,7 @@
 │  implementations and paper strategies.                                     │
 │                                                                            │
 │  The source modules are grouped into `Counting`, `Orders`, `Ranking`,      │
-│  `Statistics` and `Tables`.                                                │
+│  `Search`, `Statistics` and `Tables`.                                      │
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 

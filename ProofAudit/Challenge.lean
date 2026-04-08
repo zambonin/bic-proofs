@@ -53,6 +53,15 @@ theorem check_recursive_sequence [C : CountingContract] (σ : Strategy) (n k d :
     recursiveSequence σ n k d = unrankSequence σ n k d := by
   exact recursiveSequence_eq_unrankSequence σ n k d
 
+theorem check_bisect [C : CountingContract] (n kl kr d : Nat)
+    (path : List Nat) (r : Nat) :
+    bisectBlock n kl kr d path r = findBlock n kl kr d path r := by
+  exact bisectBlock_eq_findBlock n kl kr d path r
+
+theorem check_cached_accumulated (n i d l : Nat) (hi : 0 < i) (hl : l ≤ n) :
+    ((cachedAccumulated n i d l).1 : Int) = compCountAcc n i d l := by
+  exact cachedAccumulated_eq_compCountAcc n i d l hi hl
+
 theorem check_bous_path [C : CountingContract] (d₀ n kl kr : Nat) :
     ((stratBousAt d₀).path n kl kr).filter
       (fun w => 0 < C.count w kl d₀ * C.count (n - w) kr d₀) =
