@@ -33,6 +33,7 @@ alias check_variance_nonnegative := compPartialVariance_nonneg
 alias check_real_band := compositionBand_iff_abs_le_sqrt
 alias check_retained_cell_bound := retainedBandCells_le
 alias check_four_sigma_coverage := composition_fourSigma_inside_ge
+alias check_conditional_partial_sum_law := conditionalPartialSumLaw_apply
 alias check_sparse_count_table_size := sparseProbCombStoredValues_eq_retainedBandCells
 
 end PaperComparator

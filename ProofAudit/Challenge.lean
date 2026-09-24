@@ -104,6 +104,13 @@ theorem check_four_sigma_coverage (n k d i : Nat)
         (BoundedCompAcc n k d 0).card) := by
   exact composition_fourSigma_inside_ge n k d i hS
 
+theorem check_conditional_partial_sum_law (n j t d s : Nat)
+    (hcount : 0 < compCount n (j + t) d) (hs : s ≤ n) :
+    conditionalPartialSumLaw n j t d hcount s =
+      (compCount s j d * compCount (n - s) t d : ENNReal) /
+        (compCount n (j + t) d : ENNReal) := by
+  exact conditionalPartialSumLaw_apply n j t d s hcount hs
+
 theorem check_sparse_count_table_size (n k d c : Nat) :
     sparseProbCombStoredValues n k d c = retainedBandCells n k d c := by
   exact sparseProbCombStoredValues_eq_retainedBandCells n k d c
