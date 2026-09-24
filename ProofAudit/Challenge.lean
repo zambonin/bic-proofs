@@ -95,6 +95,15 @@ theorem check_retained_cell_bound (n k d c : Nat) (hk : 1 < k) :
       (k + 1) * (2 * c * d * (Nat.sqrt k + 1) + 1) := by
   exact retainedBandCells_le n k d c hk
 
+theorem check_four_sigma_coverage (n k d i : Nat)
+    (hS : 0 < (BoundedCompAcc n k d 0).card) :
+    (15 / 16 : Rat) ≤
+      ((((BoundedCompAcc n k d 0).filter fun z =>
+        (partialSumQ z i - compPartialMean n k d i) ^ 2 ≤
+          16 * compPartialVariance n k d i).card : Rat) /
+        (BoundedCompAcc n k d 0).card) := by
+  exact composition_fourSigma_inside_ge n k d i hS
+
 theorem check_sparse_count_table_size (n k d c : Nat) :
     sparseProbCombStoredValues n k d c = retainedBandCells n k d c := by
   exact sparseProbCombStoredValues_eq_retainedBandCells n k d c

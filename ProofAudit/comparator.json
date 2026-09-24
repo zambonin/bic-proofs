@@ -21,6 +21,7 @@
     "PaperComparator.check_variance_nonnegative",
     "PaperComparator.check_real_band",
     "PaperComparator.check_retained_cell_bound",
+    "PaperComparator.check_four_sigma_coverage",
     "PaperComparator.check_sparse_count_table_size"
   ],
   "permitted_axioms": [

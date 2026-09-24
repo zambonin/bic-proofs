@@ -30,6 +30,7 @@ import GenericRankingBic.Search.Bisect
 import GenericRankingBic.Search.BisectCost
 import GenericRankingBic.Search.ClosedFormCost
 import GenericRankingBic.Search.ColexThreshold
+import GenericRankingBic.Statistics.FourSigma
 import GenericRankingBic.Statistics.Moments
 import GenericRankingBic.Statistics.PartialSums
 import GenericRankingBic.Statistics.RealBand
