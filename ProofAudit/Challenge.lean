@@ -115,4 +115,10 @@ theorem check_sparse_count_table_size (n k d c : Nat) :
     sparseProbCombStoredValues n k d c = retainedBandCells n k d c := by
   exact sparseProbCombStoredValues_eq_retainedBandCells n k d c
 
+theorem check_four_sigma_interval (n k d i s : Nat) :
+    inStatisticalBand (compPartialMean n k d) (compPartialVariance n k d)
+      4 i s = true ↔
+      fourSigmaLowerCut n k d i ≤ s ∧ s < fourSigmaUpperCut n k d i := by
+  exact compositionFourSigmaBand_iff_interval n k d i s
+
 end PaperComparator
