@@ -34,6 +34,7 @@ import GenericRankingBic.Statistics.Conditional
 import GenericRankingBic.Statistics.ConditionalBand
 import GenericRankingBic.Statistics.FourSigma
 import GenericRankingBic.Statistics.Moments
+import GenericRankingBic.Statistics.OneParticle
 import GenericRankingBic.Statistics.PartialSums
 import GenericRankingBic.Statistics.RealBand
 import GenericRankingBic.Statistics.Variance
