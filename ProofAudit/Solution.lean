@@ -37,5 +37,6 @@ alias check_four_sigma_coverage := composition_fourSigma_inside_ge
 alias check_conditional_partial_sum_law := conditionalPartialSumLaw_apply
 alias check_sparse_count_table_size := sparseProbCombStoredValues_eq_retainedBandCells
 alias check_four_sigma_interval := compositionFourSigmaBand_iff_interval
+alias check_accumulated_scalar_bound := accumulatedScalarCells_le
 
 end PaperComparator

@@ -25,7 +25,8 @@
     "PaperComparator.check_four_sigma_coverage",
     "PaperComparator.check_conditional_partial_sum_law",
     "PaperComparator.check_sparse_count_table_size",
-    "PaperComparator.check_four_sigma_interval"
+    "PaperComparator.check_four_sigma_interval",
+    "PaperComparator.check_accumulated_scalar_bound"
   ],
   "permitted_axioms": [
     "propext",

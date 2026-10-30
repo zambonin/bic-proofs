@@ -125,4 +125,10 @@ theorem check_four_sigma_interval (n k d i s : Nat) :
       fourSigmaLowerCut n k d i ≤ s ∧ s < fourSigmaUpperCut n k d i := by
   exact compositionFourSigmaBand_iff_interval n k d i s
 
+theorem check_accumulated_scalar_bound (n k d c L : Nat) (rows windows : Finset Nat)
+    (hk : 1 < k) (hrows : ∀ i ∈ rows, i ≤ k) (hwindows : ∀ l ∈ windows, l ≤ L) :
+    accumulatedScalarCells n k d c rows windows ≤
+      rows.card * windows.card * (2 * c * (d * (Nat.sqrt k + 1) + L) + 1) := by
+  exact accumulatedScalarCells_le n k d c L rows windows hk hrows hwindows
+
 end PaperComparator
