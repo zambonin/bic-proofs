@@ -38,6 +38,7 @@ import GenericRankingBic.Statistics.OneParticle
 import GenericRankingBic.Statistics.PartialSums
 import GenericRankingBic.Statistics.RealBand
 import GenericRankingBic.Statistics.Variance
+import GenericRankingBic.Tables.AccumulatedCoverage
 import GenericRankingBic.Tables.AccumulatedStorage
 import GenericRankingBic.Tables.Basic
 import GenericRankingBic.Tables.ConstructionCost

@@ -131,4 +131,9 @@ theorem check_accumulated_scalar_bound (n k d c L : Nat) (rows windows : Finset 
       rows.card * windows.card * (2 * c * (d * (Nat.sqrt k + 1) + L) + 1) := by
   exact accumulatedScalarCells_le n k d c L rows windows hk hrows hwindows
 
+theorem check_scalar_slots (rows windows : Finset Nat) (lower upper : Nat → Nat → Nat) :
+    (packedScalarSlots rows windows lower upper).card =
+      ∑ i ∈ rows, ∑ l ∈ windows, scalarSliceLength (lower i l) (upper i l) := by
+  exact packedScalarSlots_card rows windows lower upper
+
 end PaperComparator
