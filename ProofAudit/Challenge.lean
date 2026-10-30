@@ -49,6 +49,10 @@ theorem check_raw_moment (p n k d l : Nat) (hk : 0 < k) (hl : l ≤ n) :
       ∑ j ∈ Finset.range (l + 1), (↑(n - j) : Int) ^ p * (compCount (n - j) k d : Int) := by
   exact rawMoment_eq_sum p n k d l hk hl
 
+theorem check_q_halving_set (q k : Nat) (hq : 3 ≤ q) (hk : 0 < k) :
+    (qHalvingSet q k).card = 2 * Nat.log q k - qValuation q k := by
+  exact qHalvingSet_card q k hq hk
+
 theorem check_recursive_sequence [C : CountingContract] (σ : Strategy) (n k d : Nat) :
     recursiveSequence σ n k d = unrankSequence σ n k d := by
   exact recursiveSequence_eq_unrankSequence σ n k d

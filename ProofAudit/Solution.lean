@@ -17,6 +17,7 @@ theorem check_halving_set (k : Nat) (hk : 2 ≤ k) :
   exact halvingSet_card k hk
 
 alias check_raw_moment := rawMoment_eq_sum
+alias check_q_halving_set := qHalvingSet_card
 alias check_recursive_sequence := recursiveSequence_eq_unrankSequence
 alias check_bisect := bisectBlock_eq_findBlock
 alias check_cached_accumulated := cachedAccumulated_eq_compCountAcc
